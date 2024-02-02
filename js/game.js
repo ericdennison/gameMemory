@@ -20,6 +20,34 @@ const createElement = (tag, className) => {
 
 }
 
+let firstCard = '';
+let secondCard = '';
+
+const revealCard = ({target})=>{
+
+    if(target.parentNode.className.includes('reveal-card')){
+        return;
+
+    }
+
+    if(firstCard == ''){
+
+        target.parentNode.classList.add('reveal-card')
+        firstCard = target.parentNode;
+
+
+    }else if(secondCard == ''){
+
+        target.parentNode.classList.add('reveal-card');
+        secondCard = target.parentNode;
+        
+    }
+
+   
+
+    
+}
+
 const createCard = (character) =>{
 
 
@@ -31,6 +59,8 @@ const createCard = (character) =>{
 
     card.appendChild(front);
     card.appendChild(back);
+
+    card.addEventListener('click', revealCard)
 
     return card
 
