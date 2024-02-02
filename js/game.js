@@ -23,6 +23,47 @@ const createElement = (tag, className) => {
 let firstCard = '';
 let secondCard = '';
 
+const checkEndGame = () => {
+
+    const disabledCards = document.querySelectorAll('.disable-card');
+
+    if(disabledCards.length == 20){
+        alert('Parabéns, você conseguiu!!!')
+    }
+
+} 
+
+
+const checkCards = () =>{
+    const firstCharacter = firstCard.getAttribute('data-character')
+    const secondCharacter = secondCard.getAttribute('data-character')
+
+    if(firstCharacter == secondCharacter){
+
+        firstCard.firstChild.classList.add('disable-card');
+        secondCard.firstChild.classList.add('disable-card');
+
+        firstCard = '';
+        secondCard = '';
+
+        checkEndGame();
+
+    }else{
+
+        setTimeout(()=>{
+
+        firstCard.classList.remove('reveal-card')
+        secondCard.classList.remove('reveal-card')
+
+        firstCard = '';
+        secondCard = '';
+    
+
+        }, 1000);
+        
+    }
+}
+
 const revealCard = ({target})=>{
 
     if(target.parentNode.className.includes('reveal-card')){
@@ -43,7 +84,7 @@ const revealCard = ({target})=>{
         
     }
 
-   
+   checkCards()
 
     
 }
@@ -61,6 +102,7 @@ const createCard = (character) =>{
     card.appendChild(back);
 
     card.addEventListener('click', revealCard)
+    card.setAttribute('data-character', character)
 
     return card
 
