@@ -11,8 +11,6 @@ const characteres = [
     'summer',
     'meeseeks',
     'scroopy',
-
-
 ]
 
 const createElement = (tag, className) => {
@@ -40,7 +38,13 @@ const createCard = (character) =>{
 }
 
 const loadGame = () => {
-    characteres.forEach((character) => {
+
+    const duplicateCharacters = [...characteres, ...characteres]
+
+    const shuffledArray = duplicateCharacters.sort(() => Math.random() - 0.5);
+
+    
+    shuffledArray.forEach((character) => {
 
         const card = createCard(character);
         grid.appendChild(card)
